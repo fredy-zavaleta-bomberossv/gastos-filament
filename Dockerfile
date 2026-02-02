@@ -9,6 +9,17 @@ RUN apt-get update && apt-get install -y \
     zip \
     && docker-php-ext-install intl zip pdo pdo_mysql
 
+
+    # Instalar Node y NPM para Vite
+RUN apt-get update && apt-get install -y nodejs npm
+
+# Instalar dependencias JS
+RUN npm install
+
+# Construir assets de Vite
+RUN npm run build
+
+
 # Instalar Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
